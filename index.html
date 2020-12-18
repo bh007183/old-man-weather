@@ -10,26 +10,13 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
       <!-- CSS -->
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
 </head>
 <body>
     <Header> Weather Dashboard </Header>
     <main class="container">
 
         <section class="row">
-         <!-- Retreaved Data Section-->
-            <Div class="col-8">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="row currentDat"></div>
-                        <div class="row curTemp"></div>
-                        <div class="row curHum"></div>
-                        <div class="row curSpeed"></div>
-                        <div class="row curIndex"></div>
-                    </div>
-                    <div class="col-6"></div>
-                </div>
-
-            </Div>
          <!-- Search Bar Section-->
             <Div class="col-4">
                 <p id="searchtext">Search for a City:</p>
@@ -41,6 +28,20 @@
                 <nav class="leftcol">
 
                 </nav>
+
+            </Div>
+        <!-- Retreaved Data Section-->
+            <Div class="col-8">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row currentDat"></div>
+                        <div class="row curTemp"></div>
+                        <div class="row curHum"></div>
+                        <div class="row curSpeed"></div>
+                        <div class="row curIndex"></div>
+                    </div>
+                    <div class="col-6"></div>
+                </div>
 
             </Div>
         </section>

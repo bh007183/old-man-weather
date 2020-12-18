@@ -1,38 +1,32 @@
 //API key1 e7a29c6f4a5754e864692a14224adc4e
 //API key2 70cab7eef42f26169af049b4707ac69a
+// UV http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid={API key}
 
-
-
-
-//5 DAY
-//var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=70cab7eef42f26169af049b4707ac69a$units=imperial"
 
 var getLocal = JSON.parse(localStorage.getItem("city")) || []
 
-console.log(getLocal)
-// UV http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid={API key}
+console.log(getLocal.name)
+var time = moment().format('MMMM Do YYYY')
+
+$(".currentDat").text(getLocal.name + "  " + time)
+
+
 
 $(".button").on("click", function(event){
  event.preventDefault()
  var cityName = $(".search").val()
- var queryURL = "https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=70cab7eef42f26169af049b4707ac69a&units=imperial"
+ var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
+ //var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
  
 $.ajax({
     url: queryURL,
+    mod: "cors",
     method: "GET"
+    
 }).then(function(response){
     
 localStorage.setItem("city", JSON.stringify(response))
 getLocal.push(response)
-
-
-var date = new Date().toLocaleDateString()
-$(".currentDat").append(response)
-
-
-
-
-    
 
 
 
