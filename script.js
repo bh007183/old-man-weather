@@ -3,51 +3,101 @@
 // UV http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid={API key}
 
 
-var getLocal = JSON.parse(localStorage.getItem("city")) || []
-
-var date = moment().format('MMMM Do YYYY')
+// var getLocal = JSON.parse(localStorage.getItem("city"))|| []   //Empty array
 
 
+// console.log(getLocal)
 
-var getForcast = JSON.parse(localStorage.getItem("day5"))
+// for (var i = getLocal.length - 1; i >= 0;  i--){
+//     var button = $("<button>").text(getLocal[i].name)
+//     button.css("width", "20vw")
+//     $(".leftcol").prepend(button)
+    
+
+// }
+
+// var date = moment().format('MMMM Do YYYY')
+//  $(".currentDat").text(getLocal[0].name + "  " + date) || []
+//  $(".curTemp").text("Temperature: " + getLocal[0].main.temp + "°F") || []
+//  $(".curHum").text("Humidity: " + getLocal[0].main.humidity + "%") || []
+//  $(".curSpeed").text("Wind Speed: " + getLocal[0].wind.speed + "MPH") || []
 
 
+
+//For loop for creating buttons. 
+
+var getForcast = JSON.parse(localStorage.getItem("day5")) || []
+console.log()
+
+
+
+    
+        $(".one").text(getForcast[0].list[3].main.temp)
+        $(".one1").text(getForcast[0].list[3].main.humidity)
+        $(".one2").val(getForcast[0].list[3].weather.icon)
+
+        $(".two").text(getForcast[0].list[11].main.temp)
+        $(".two1").text(getForcast[0].list[11].main.humidity)
+        $(".two2").text(getForcast[0].list[11].weather.icon)
+
+        $(".three").text(getForcast[0].list[19].main.temp)
+        $(".three1").text(getForcast[0].list[19].main.humidity)
+        $(".three2").text(getForcast[0].list[19].weather.icon)
+
+        $(".four").text(getForcast[0].list[27].main.temp)
+        $(".four1").text(getForcast[0].list[27].main.humidity)
+        $(".four2").text(getForcast[0].list[27].weather.icon)
+
+        $(".five").text(getForcast[0].list[35].main.temp)
+        $(".five1").text(getForcast[0].list[35].main.humidity)
+        $(".five2").text(getForcast[0].list[35].weather.icon)
+
+
+
+//BUTTON ON CLICK EVENT
+// EVENT PREVENT TO KEEP IT FROM RELOADING PAGE THOUGH I WONDER IF I WANT THAT
+// VAR CITYNAME ===VALUE OF INPUT BAR
+// VAR QUERY URL FOR GETTING OBJECT FROM API ALONG EITH AJAX FUNCTION THAT IS TRIGGERED IN ONCLICK EVENT
+// THEN IT TAKES THE RESPONSE OBJECT AND PUSHES IT TO ABOVE GETLOCAL EMPTY Array
+
+// WHICH SHOULD RECIEVE IT AND ADD IT WITH OUT REFRESH????
+
+// AND BELOW LOCAL STORAGE SHOULD SAVE THE ARRAY AS A String.
 
 $(".button").on("click", function(event){
  event.preventDefault()
  var cityName = $(".search").val()
- var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
+//  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
  var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
-$.ajax({
-    url: queryURL,
-    mod: "cors",
-    method: "GET"
+// $.ajax({
+//     url: queryURL,
+//     mod: "cors",
+//     method: "GET"
     
-}).then(function(response){
-    $(".currentDat").text(getLocal.name + "  " + time)
-$(".curTemp").text("Temperature: " + getLocal.main.temp + "°F")
-$(".curHum").text("Humidity: " + getLocal.main.humidity + "%")
-$(".curSpeed").text("Wind Speed: " + getLocal.wind.speed + "MPH")
-    
-localStorage.setItem("city", [JSON.stringify(response)])
-getLocal.push(response)
+// }).then(function(response){
+ 
+// getLocal.unshift(response) 
+// localStorage.setItem("city", JSON.stringify(getLocal))
 
 
-})
+// })
+
+
+
 $.ajax({
     url: day5,
     method: "GET"
 
 }).then(function(results){
-    localStorage.setItem("day5", JSON.stringify(results))
-    getForcast.push(results)
-    console.log(
-        weatherTags(3),
-    weatherTags(11),
-    weatherTags(19),
-    weatherTags(27),
-    weatherTags(35)
-    )
+
+    getForcast.unshift(results)
+    localStorage.setItem("day5", JSON.stringify(getForcast))
+
+    
+    
+   
+
+    
 
 })
 
@@ -55,23 +105,10 @@ $.ajax({
 
 })
 
-// var buttons = $("<button>")
-// buttons.text(cityName)
-// $(".leftcol").prepend(buttons)
-//CURRENT
 
-// $(".curIndex").text(getLocal.)
-// function weathTags(x){
-// results.list[x].main.temp
-// results.list[x].main.humidity
-// results.list[x].weather.icon
-// }
 
-// weatherTags(3)
-// weatherTags(11)
-// weatherTags(19)
-// weatherTags(27)
-// weatherTags(35)
+
+
 
 
 
