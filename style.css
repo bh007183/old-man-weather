@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    background-color: skyblue;
 }
 
 header {
@@ -16,13 +17,18 @@ header {
 #searchtext {
     font-size: 1.25rem;
 }
+.button {
+    background-color: rgb(255, 255, 199);
+}
 .leftcol {
     border-style: solid;
     border-color: yellowgreen;
+    padding-bottom: 1vw;
+    background-color: skyblue;
 }
 .rowHeight{
     display: flex;
-    justify-content: space-between;
+    
     
 }
 main {
@@ -35,4 +41,19 @@ main {
     grid-template-rows: 100px 70px 100px;
     grid-gap: 10px;
     border-style: solid;
+}
+.buttons {
+    margin-top: 1vw;
+    height: 3vw;
+    width: 25vw;
+    background-color: rgb(131, 108, 46)
+}
+.buttons :active {
+    font-size: 50px;
+    font: bolder;
+
+}
+.text{
+    font-size: 20px;
+    font-weight: bold;
 }

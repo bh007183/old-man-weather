@@ -3,54 +3,51 @@
 // UV http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid={API key}
 
 
-// var getLocal = JSON.parse(localStorage.getItem("city"))|| []   //Empty array
+var getLocal = JSON.parse(localStorage.getItem("city"))|| []   //Empty array
 
 
-// console.log(getLocal)
+console.log(getLocal)
 
-// for (var i = getLocal.length - 1; i >= 0;  i--){
-//     var button = $("<button>").text(getLocal[i].name)
-//     button.css("width", "20vw")
-//     $(".leftcol").prepend(button)
+for (var i = getLocal.length - 1; i >= 0;  i--){
+    var button = $("<button>").text(getLocal[i].name)
+    button.addClass("buttons")
+    $(".leftcol").prepend(button)
     
 
-// }
-
-// var date = moment().format('MMMM Do YYYY')
-//  $(".currentDat").text(getLocal[0].name + "  " + date) || []
-//  $(".curTemp").text("Temperature: " + getLocal[0].main.temp + "°F") || []
-//  $(".curHum").text("Humidity: " + getLocal[0].main.humidity + "%") || []
-//  $(".curSpeed").text("Wind Speed: " + getLocal[0].wind.speed + "MPH") || []
-
+}
 
 
 //For loop for creating buttons. 
 
-var getForcast = JSON.parse(localStorage.getItem("day5")) || []
-console.log()
+// var getForcast = JSON.parse(localStorage.getItem("day5")) || []
+// console.log()
 
 
-
+//     $(".moment").text(getForcast[0].list[4].dt_txt)
+//     $(".moment1").text(getForcast[0].list[12].dt_txt)
+//     $(".moment2").text(getForcast[0].list[20].dt_txt)
+//     $(".moment3").text(getForcast[0].list[28].dt_txt)
+//     $(".moment4").text(getForcast[0].list[36].dt_txt)
     
-        $(".one").text(getForcast[0].list[3].main.temp)
-        $(".one1").text(getForcast[0].list[3].main.humidity)
-        $(".one2").val(getForcast[0].list[3].weather.icon)
+//     $(".one").text("T: " + getForcast[0].list[4].main.temp)
+//     $(".one1").text("H: " + getForcast[0].list[4].main.humidity)
+//     $(".one2").val(getForcast[0].list[4].weather.icon)
 
-        $(".two").text(getForcast[0].list[11].main.temp)
-        $(".two1").text(getForcast[0].list[11].main.humidity)
-        $(".two2").text(getForcast[0].list[11].weather.icon)
+//     $(".two").text("T: " + getForcast[0].list[12].main.temp)
+//     $(".two1").text("H: " + getForcast[0].list[12].main.humidity)
+//     $(".two2").text(getForcast[0].list[12].weather.icon)
 
-        $(".three").text(getForcast[0].list[19].main.temp)
-        $(".three1").text(getForcast[0].list[19].main.humidity)
-        $(".three2").text(getForcast[0].list[19].weather.icon)
+//     $(".three").text("T: " + getForcast[0].list[20].main.temp)
+//     $(".three1").text("H: " + getForcast[0].list[20].main.humidity)
+//     $(".three2").text(getForcast[0].list[20].weather.icon)
 
-        $(".four").text(getForcast[0].list[27].main.temp)
-        $(".four1").text(getForcast[0].list[27].main.humidity)
-        $(".four2").text(getForcast[0].list[27].weather.icon)
+//     $(".four").text("T: " + getForcast[0].list[28].main.temp)
+//     $(".four1").text("H: " + getForcast[0].list[28].main.humidity)
+//     $(".four2").text(getForcast[0].list[28].weather.icon)
 
-        $(".five").text(getForcast[0].list[35].main.temp)
-        $(".five1").text(getForcast[0].list[35].main.humidity)
-        $(".five2").text(getForcast[0].list[35].weather.icon)
+//     $(".five").text("T: " + getForcast[0].list[36].main.temp)
+//     $(".five1").text("H: " + getForcast[0].list[36].main.humidity)
+//     $(".five2").text(getForcast[0].list[36].weather.icon)
 
 
 
@@ -67,68 +64,48 @@ console.log()
 $(".button").on("click", function(event){
  event.preventDefault()
  var cityName = $(".search").val()
-//  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
- var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
-// $.ajax({
-//     url: queryURL,
-//     mod: "cors",
-//     method: "GET"
+ var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
+//  var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
+$.ajax({
+    url: queryURL,
+    mod: "cors",
+    method: "GET"
     
-// }).then(function(response){
+}).then(function(response){
  
-// getLocal.unshift(response) 
-// localStorage.setItem("city", JSON.stringify(getLocal))
+console.log(response)
 
+getLocal.unshift(response) 
+localStorage.setItem("city", JSON.stringify(getLocal))
+var date = moment().format('MMMM Do YYYY')
+    $(".currentDat").text(getLocal[0].name + "  " + date) || []
+    $(".curTemp").text("Temperature: " + getLocal[0].main.temp + "°F") || []
+    $(".curHum").text("Humidity: " + getLocal[0].main.humidity + "%") || []
+    $(".curSpeed").text("Wind Speed: " + getLocal[0].wind.speed + "MPH") || []
+
+
+
+
+})
+
+// $.ajax({
+//     url: day5,
+//     method: "GET"
+
+// }).then(function(results){
+
+//     getForcast.unshift(results)
+//     localStorage.setItem("day5", JSON.stringify(getForcast))
+
+   
 
 // })
 
 
 
-$.ajax({
-    url: day5,
-    method: "GET"
+})
 
-}).then(function(results){
-
-    getForcast.unshift(results)
-    localStorage.setItem("day5", JSON.stringify(getForcast))
-
-    
-    
    
-
-    
-
-})
-
-
-
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-//TODO: First, must get each search to generate a button with the cities name on it.
-//TODO: it will need to be saved in local storage so as not to be lost after refresh.
-//TODO: each button or search will need to place its value into url to summon data from api and place it on the screen.
-//TODO: The Data needs to come from three sources but for starters we will focus on the main ones.
-
-
-
-
-
-
-
-    
 // GIVEN a weather dashboard with form inputs
 // WHEN I search for a city
 // THEN I am presented with current and future conditions for that city and that city is added to the search history
