@@ -5,10 +5,11 @@
 
 var getLocal = JSON.parse(localStorage.getItem("city")) || []
 
-console.log(getLocal.name)
-var time = moment().format('MMMM Do YYYY')
+var date = moment().format('MMMM Do YYYY')
 
-$(".currentDat").text(getLocal.name + "  " + time)
+
+
+var getForcast = JSON.parse(localStorage.getItem("day5"))
 
 
 
@@ -16,34 +17,61 @@ $(".button").on("click", function(event){
  event.preventDefault()
  var cityName = $(".search").val()
  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
- //var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
- 
+ var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
 $.ajax({
     url: queryURL,
     mod: "cors",
     method: "GET"
     
 }).then(function(response){
+    $(".currentDat").text(getLocal.name + "  " + time)
+$(".curTemp").text("Temperature: " + getLocal.main.temp + "°F")
+$(".curHum").text("Humidity: " + getLocal.main.humidity + "%")
+$(".curSpeed").text("Wind Speed: " + getLocal.wind.speed + "MPH")
     
-localStorage.setItem("city", JSON.stringify(response))
+localStorage.setItem("city", [JSON.stringify(response)])
 getLocal.push(response)
 
 
+})
+$.ajax({
+    url: day5,
+    method: "GET"
 
+}).then(function(results){
+    localStorage.setItem("day5", JSON.stringify(results))
+    getForcast.push(results)
+    console.log(
+        weatherTags(3),
+    weatherTags(11),
+    weatherTags(19),
+    weatherTags(27),
+    weatherTags(35)
+    )
 
 })
 
 
 
-    
-
 })
+
 // var buttons = $("<button>")
 // buttons.text(cityName)
 // $(".leftcol").prepend(buttons)
 //CURRENT
 
+// $(".curIndex").text(getLocal.)
+// function weathTags(x){
+// results.list[x].main.temp
+// results.list[x].main.humidity
+// results.list[x].weather.icon
+// }
 
+// weatherTags(3)
+// weatherTags(11)
+// weatherTags(19)
+// weatherTags(27)
+// weatherTags(35)
 
 
 
