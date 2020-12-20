@@ -21,13 +21,12 @@ header {
     background-color: rgb(255, 255, 199);
 }
 .leftcol {
-    border-style: solid;
-    border-color: yellowgreen;
     padding-bottom: 1vw;
     background-color: skyblue;
 }
 .rowHeight{
     display: flex;
+    justify-content: space-between;
     
     
 }
@@ -35,13 +34,7 @@ main {
     margin-right: 0;
 }
 
-.space {
-    display: grid;
-    grid-template-columns: 70px 70px 70px;
-    grid-template-rows: 100px 70px 100px;
-    grid-gap: 10px;
-    border-style: solid;
-}
+
 .buttons {
     margin-top: 1vw;
     height: 3vw;
@@ -56,4 +49,8 @@ main {
 .text{
     font-size: 20px;
     font-weight: bold;
+    margin-left: 2vw;
+}
+.currentDat {
+    margin-top: 3vw;
 }
