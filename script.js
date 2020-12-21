@@ -3,60 +3,57 @@
 // UV http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid={API key}
 
 
-var getLocal = JSON.parse(localStorage.getItem("city"))|| []
+var getLocal = JSON.parse(localStorage.getItem("city")) || []
 ////////////////////////////////////////////////////////////////
 var getForcast = JSON.parse(localStorage.getItem("day5")) || []   //Empty array
 
 render()
 
-$("button").on("click", function(event){
+
+// $("button").on("click", function(event){
    
 
-    var cityName = $(event.target).attr("data-name")
+// var cityName = $(event.target).attr("data-name")
 
-console.log($(event.target).attr("data-name"))
+// console.log($(event.target).attr("data-name"))
 
-   
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
-    var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
-   $.ajax({
-       url: queryURL,
-       method: "GET"
+//     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
+//     var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
+//    $.ajax({
+//        url: queryURL,
+//        method: "GET"
        
-   }).then(function(response){
-   //console.log(response)
-   getLocal.unshift(response) 
+//    }).then(function(response){
+ 
+//    getLocal.unshift(response) 
    
-   
-   
-   })
-   $.ajax({
-    url: day5,
-    method: "GET"
+//    })
+//    $.ajax({
+//     url: day5,
+//     method: "GET"
 
-}).then(function(results){
+// }).then(function(results){
 
-    getForcast.unshift(results)
-    
-
-   
-  
-})
-render()
-store()
-})
+//     getForcast.unshift(results)
+ 
+// })
+// render()
+// store()
+// })
    
 
 
 function render(){
-    
+    try{
     for (var i = getLocal.length - 1; i >= 0;  i--){
         var button = $("<button>").text(getLocal[i].name)
         button.attr("data-name" , getLocal[i].name)
         button.addClass("buttons")
-        var date = moment().format('MMMM Do YYYY')
-        
         $(".leftcol").prepend(button)
+
+    }
+        var date = moment().format('MMMM Do YYYY')
+       
         $(".currentDat").text(getLocal[0].name + "  " + date)
         $(".curTemp").text("Temperature: " + getLocal[0].main.temp + "°F")
         $(".curHum").text("Humidity: " + getLocal[0].main.humidity + "%")
@@ -75,6 +72,7 @@ function render(){
         $(".two").text("T: " + getForcast[0].list[12].main.temp)
         $(".two1").text("H: " + getForcast[0].list[12].main.humidity)
         $(".two2").text(getForcast[0].list[12].weather.icon)
+        //http://openweathermap.org/img/wn/code_here.png
     
         $(".three").text("T: " + getForcast[0].list[20].main.temp)
         $(".three1").text("H: " + getForcast[0].list[20].main.humidity)
@@ -87,11 +85,17 @@ function render(){
         $(".five").text("T: " + getForcast[0].list[36].main.temp)
         $(".five1").text("H: " + getForcast[0].list[36].main.humidity)
         $(".five2").text(getForcast[0].list[36].weather.icon)
+        }
+        catch(err) {
+            ""
+          }
+        
     
-    }
+    
     
     
 }    
+
     
 
 
@@ -126,7 +130,8 @@ localStorage.setItem("day5", JSON.stringify(getForcast))
 
 $(".button").on("click", function(event){
  event.preventDefault()
- $("nav").empty()
+
+$("nav").empty()
  var cityName = $(".search").val()
  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
  var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
@@ -139,8 +144,6 @@ $.ajax({
 console.log(response)
 getLocal.unshift(response) 
 
-
-
 })
 
 $.ajax({
@@ -150,17 +153,15 @@ $.ajax({
 }).then(function(results){
 
     getForcast.unshift(results)
-    
-
-   
-  
+ 
 })
 store()
 render()
+
 })
 
 
-
+render()
 
    
 // GIVEN a weather dashboard with form inputs
