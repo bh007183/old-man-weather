@@ -8,12 +8,12 @@ var getLocal = JSON.parse(localStorage.getItem("city")) || []
 var getForcast = JSON.parse(localStorage.getItem("day5")) || []   //Empty array
 
 render()
-
 buttonClick()
+
 function buttonClick(){
 $("button").on("click", function(event){
    
-    buttonClick()
+    
     var cityName = $(event.target).attr("data-name")
     
     console.log($(event.target).attr("data-name"))
@@ -31,9 +31,6 @@ $("button").on("click", function(event){
         buttonClick()
         
         
-     
-       
-       
        })
        $.ajax({
         url: day5,
@@ -54,6 +51,7 @@ $("button").on("click", function(event){
     })
 
 }
+
 function render(){
     try{
         $("nav").empty()
@@ -112,11 +110,6 @@ function render(){
     
 }    
 
-    
-
-
-
-
 
 function store (){
 localStorage.setItem("city", JSON.stringify(getLocal));
@@ -130,11 +123,10 @@ var getForcast = JSON.parse(localStorage.getItem("day5")) || []
 console.log()
 
 
-
 $(".button").on("click", function(event){
  event.preventDefault()
 
- buttonClick()
+ 
  var cityName = $(".search").val()
  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
  var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
@@ -160,6 +152,7 @@ store()
 render()
     
 })
+
 
 })
 
