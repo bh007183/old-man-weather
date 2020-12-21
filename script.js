@@ -10,36 +10,36 @@ var getForcast = JSON.parse(localStorage.getItem("day5")) || []   //Empty array
 render()
 
 
-// $("button").on("click", function(event){
+$("button").on("click", function(event){
    
 
-// var cityName = $(event.target).attr("data-name")
+var cityName = $(event.target).attr("data-name")
 
-// console.log($(event.target).attr("data-name"))
+console.log($(event.target).attr("data-name"))
 
-//     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
-//     var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
-//    $.ajax({
-//        url: queryURL,
-//        method: "GET"
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
+    var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
+   $.ajax({
+       url: queryURL,
+       method: "GET"
        
-//    }).then(function(response){
+   }).then(function(response){
  
-//    getLocal.unshift(response) 
+   getLocal.unshift(response) 
    
-//    })
-//    $.ajax({
-//     url: day5,
-//     method: "GET"
+   })
+   $.ajax({
+    url: day5,
+    method: "GET"
 
-// }).then(function(results){
+}).then(function(results){
 
-//     getForcast.unshift(results)
+    getForcast.unshift(results)
  
-// })
-// render()
-// store()
-// })
+})
+render()
+store()
+})
    
 
 
@@ -53,7 +53,7 @@ function render(){
 
     }
         var date = moment().format('MMMM Do YYYY')
-       
+        $(".image").attr("src", "http://openweathermap.org/img/wn/" + getLocal[0].weather[0].icon + ".png")
         $(".currentDat").text(getLocal[0].name + "  " + date)
         $(".curTemp").text("Temperature: " + getLocal[0].main.temp + "°F")
         $(".curHum").text("Humidity: " + getLocal[0].main.humidity + "%")
@@ -67,24 +67,26 @@ function render(){
         
         $(".one").text("T: " + getForcast[0].list[4].main.temp)
         $(".one1").text("H: " + getForcast[0].list[4].main.humidity)
-        $(".one2").val(getForcast[0].list[4].weather.icon)
-    
+        $(".one2").attr("src", "http://openweathermap.org/img/wn/" + getForcast[0].list[4].weather[0].icon + ".png")
+        
         $(".two").text("T: " + getForcast[0].list[12].main.temp)
         $(".two1").text("H: " + getForcast[0].list[12].main.humidity)
-        $(".two2").text(getForcast[0].list[12].weather.icon)
-        //http://openweathermap.org/img/wn/code_here.png
-    
+        $(".two2").attr("src", "http://openweathermap.org/img/wn/" + getForcast[0].list[12].weather[0].icon + ".png")
+       
+        
         $(".three").text("T: " + getForcast[0].list[20].main.temp)
         $(".three1").text("H: " + getForcast[0].list[20].main.humidity)
-        $(".three2").text(getForcast[0].list[20].weather.icon)
-    
+        $(".three2").attr("src", "http://openweathermap.org/img/wn/" + getForcast[0].list[20].weather[0].icon + ".png")
+        
         $(".four").text("T: " + getForcast[0].list[28].main.temp)
         $(".four1").text("H: " + getForcast[0].list[28].main.humidity)
-        $(".four2").text(getForcast[0].list[28].weather.icon)
+        $(".four2").attr("src", "http://openweathermap.org/img/wn/" + getForcast[0].list[28].weather[0].icon + ".png")
+        
     
         $(".five").text("T: " + getForcast[0].list[36].main.temp)
         $(".five1").text("H: " + getForcast[0].list[36].main.humidity)
-        $(".five2").text(getForcast[0].list[36].weather.icon)
+        $(".five2").attr("src", "http://openweathermap.org/img/wn/" + getForcast[0].list[36].weather[0].icon + ".png")
+        
         }
         catch(err) {
             ""
@@ -108,10 +110,10 @@ localStorage.setItem("city", JSON.stringify(getLocal));
 localStorage.setItem("day5", JSON.stringify(getForcast))
 }
 
-//For loop for creating buttons. 
 
-// var getForcast = JSON.parse(localStorage.getItem("day5")) || []
-// console.log()
+
+var getForcast = JSON.parse(localStorage.getItem("day5")) || []
+console.log()
 
 
 
