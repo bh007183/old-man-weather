@@ -9,49 +9,63 @@ var getForcast = JSON.parse(localStorage.getItem("day5")) || []   //Empty array
 
 render()
 
-
+buttonClick()
+function buttonClick(){
 $("button").on("click", function(event){
    
-
-var cityName = $(event.target).attr("data-name")
-
-console.log($(event.target).attr("data-name"))
-
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
-    var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
-   $.ajax({
-       url: queryURL,
-       method: "GET"
+    buttonClick()
+    var cityName = $(event.target).attr("data-name")
+    
+    console.log($(event.target).attr("data-name"))
+    
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
+        var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
+       $.ajax({
+           url: queryURL,
+           method: "GET"
+           
+       }).then(function(response){
+        getLocal.unshift(response) 
+        render()
+        store()
+        buttonClick()
+        
+        
+     
        
-   }).then(function(response){
- 
-   getLocal.unshift(response) 
-   
-   })
-   $.ajax({
-    url: day5,
-    method: "GET"
+       
+       })
+       $.ajax({
+        url: day5,
+        method: "GET"
+    
+        }).then(function(results){
+            getForcast.unshift(results)
+        render()  
+        store()
+        
+        buttonClick()
+        
+        
+     
+        })
+    
+        
+    })
 
-}).then(function(results){
-
-    getForcast.unshift(results)
- 
-})
-render()
-store()
-})
-   
-
-
+}
 function render(){
     try{
+        $("nav").empty()
     for (var i = getLocal.length - 1; i >= 0;  i--){
         var button = $("<button>").text(getLocal[i].name)
         button.attr("data-name" , getLocal[i].name)
         button.addClass("buttons")
+        
         $(".leftcol").prepend(button)
 
     }
+    
         var date = moment().format('MMMM Do YYYY')
         $(".image").attr("src", "http://openweathermap.org/img/wn/" + getLocal[0].weather[0].icon + ".png")
         $(".currentDat").text(getLocal[0].name + "  " + date)
@@ -117,23 +131,10 @@ console.log()
 
 
 
-
-
-
-//BUTTON ON CLICK EVENT
-// EVENT PREVENT TO KEEP IT FROM RELOADING PAGE THOUGH I WONDER IF I WANT THAT
-// VAR CITYNAME ===VALUE OF INPUT BAR
-// VAR QUERY URL FOR GETTING OBJECT FROM API ALONG EITH AJAX FUNCTION THAT IS TRIGGERED IN ONCLICK EVENT
-// THEN IT TAKES THE RESPONSE OBJECT AND PUSHES IT TO ABOVE GETLOCAL EMPTY Array
-
-// WHICH SHOULD RECIEVE IT AND ADD IT WITH OUT REFRESH????
-
-// AND BELOW LOCAL STORAGE SHOULD SAVE THE ARRAY AS A String.
-
 $(".button").on("click", function(event){
  event.preventDefault()
 
-$("nav").empty()
+ buttonClick()
  var cityName = $(".search").val()
  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
  var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
@@ -145,25 +146,24 @@ $.ajax({
 }).then(function(response){
 console.log(response)
 getLocal.unshift(response) 
+store()
+render()
 
 })
-
 $.ajax({
     url: day5,
     method: "GET"
 
 }).then(function(results){
-
-    getForcast.unshift(results)
- 
-})
+getForcast.unshift(results)
 store()
 render()
+    
+})
 
 })
 
 
-render()
 
    
 // GIVEN a weather dashboard with form inputs
