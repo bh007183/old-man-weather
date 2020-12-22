@@ -27,6 +27,7 @@ header {
 .rowHeight{
     display: flex;
     justify-content: space-between;
+    margin-top: 2vw;
     
     
 }
@@ -47,6 +48,7 @@ main {
 
 }
 .text{
+   
     font-size: 20px;
     font-weight: bold;
     margin-left: 2vw;
