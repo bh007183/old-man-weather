@@ -57,3 +57,18 @@ main {
 .image{
     margin-left: 9vw;
 }
+.space {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.clear {
+        
+        background: yellow;
+        border-radius: 50%;
+        height: 5vw;
+        width: 5vw;
+        margin: 0;
+      }

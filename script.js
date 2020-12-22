@@ -9,7 +9,12 @@ var getUv = JSON.parse(localStorage.getItem("uvIn")) || []
 
 
 render()
-// buttonClick()
+//buttonClick()
+$(".clear").on("click", function(){
+    localStorage.clear()
+    $("nav").empty()
+    location.reload()
+})
 
 
 ///////////////Function For Buttons//////////////////////
@@ -68,19 +73,21 @@ $("button").on("click", function(event){
 
 }
 
+function buttonCreation(){  
+    $("nav").empty()
+for (var i = getLocal.length - 1; i >= 0;  i--){
+    var button = $("<button>").text(getLocal[i].name)
+    button.attr("data-name" , getLocal[i].name)
+    button.addClass("buttons")
+    $(".leftcol").prepend(button)
+}    
+}
+
+
 function render(){
     try{
+        buttonCreation()
         
-        $("nav").empty()
-    for (var i = getLocal.length - 1; i >= 0;  i--){
-        var button = $("<button>").text(getLocal[i].name)
-        button.attr("data-name" , getLocal[i].name)
-        button.addClass("buttons")
-        
-        $(".leftcol").prepend(button)
-
-    }    
-        $(".curIndex").text("UV: " + getUv[0] )
         if (getUv[0] > 7){
             $(".curIndex").css("background-color", "red")
           }
@@ -98,7 +105,7 @@ function render(){
         $(".curTemp").text("Temperature: " + getLocal[0].main.temp + "°F")
         $(".curHum").text("Humidity: " + getLocal[0].main.humidity + "%")
         $(".curSpeed").text("Wind Speed: " + getLocal[0].wind.speed + "MPH")
-
+        $(".curIndex").text("UV: " + getUv[0] )
         $(".moment").text(getForcast[0].list[4].dt_txt)
         $(".moment1").text(getForcast[0].list[12].dt_txt)
         $(".moment2").text(getForcast[0].list[20].dt_txt)
@@ -159,6 +166,7 @@ $(".button").on("click", function(event){
 
 
  var cityName = $("input").val()
+
  console.log(cityName)
  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
  var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
