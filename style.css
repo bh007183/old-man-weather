@@ -23,6 +23,7 @@ header {
 .leftcol {
     padding-bottom: 1vw;
     background-color: skyblue;
+    float: left;
 }
 .rowHeight{
     display: flex;
@@ -39,14 +40,10 @@ main {
 .buttons {
     margin-top: 1vw;
     height: 3vw;
-    width: 25vw;
+    width: 20vw;
     background-color: rgb(131, 108, 46)
 }
-.buttons :active {
-    font-size: 50px;
-    font: bolder;
 
-}
 .text{
    
     font-size: 20px;
