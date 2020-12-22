@@ -4,11 +4,19 @@
 
 
 var getLocal = JSON.parse(localStorage.getItem("city")) || []
+
+
 ////////////////////////////////////////////////////////////////
 var getForcast = JSON.parse(localStorage.getItem("day5")) || []   //Empty array
 
+var getUv = JSON.parse(localStorage.getItem("uvIn")) || []
+console.log(getUv)
+
+
 render()
 buttonClick()
+
+
 
 function buttonClick(){
 $("button").on("click", function(event){
@@ -29,7 +37,18 @@ $("button").on("click", function(event){
         render()
         store()
         buttonClick()
-        
+        var uv = "http://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=70cab7eef42f26169af049b4707ac69a"
+        $.ajax({
+        url: uv,
+        method: "GET"
+
+        }).then(function(uvIndex){
+        console.log(uvIndex.value)
+        getUv.unshift(uvIndex.value)
+        render()  
+        store()
+    })
+    buttonClick()
         
        })
        $.ajax({
@@ -62,7 +81,18 @@ function render(){
         
         $(".leftcol").prepend(button)
 
-    }
+    }    
+        $(".curIndex").text("UV: " + getUv[0] )
+        if (getUv[0] > 7){
+            $(".curIndex").css("background-color", "red")
+          }
+          if (getUv[0] > 3 && getUv[0] < 7){
+            $(".curIndex").css("background-color", "yellow")
+          }
+          if (getUv[0] < 3){
+            $(".curIndex").css("background-color", "green")
+          }
+          
     
         var date = moment().format('MMMM Do YYYY')
         $(".image").attr("src", "http://openweathermap.org/img/wn/" + getLocal[0].weather[0].icon + ".png")
@@ -98,6 +128,7 @@ function render(){
         $(".five").text("T: " + getForcast[0].list[36].main.temp)
         $(".five1").text("H: " + getForcast[0].list[36].main.humidity)
         $(".five2").attr("src", "http://openweathermap.org/img/wn/" + getForcast[0].list[36].weather[0].icon + ".png")
+
         
         }
         catch(err) {
@@ -115,32 +146,48 @@ function store (){
 localStorage.setItem("city", JSON.stringify(getLocal));
 ///////////////////////////////////////////////////////
 localStorage.setItem("day5", JSON.stringify(getForcast))
+////////////////////////////////////////////////////////
+
+localStorage.setItem("uvIn", JSON.stringify(getUv))
+
 }
 
 
 
-var getForcast = JSON.parse(localStorage.getItem("day5")) || []
-console.log()
 
 
 $(".button").on("click", function(event){
  event.preventDefault()
 
+
  
  var cityName = $(".search").val()
  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
  var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
+ 
+
 $.ajax({
     url: queryURL,
     mod: "cors",
     method: "GET"
     
 }).then(function(response){
-console.log(response)
 getLocal.unshift(response) 
 store()
 render()
+//////////
+var uv = "http://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=70cab7eef42f26169af049b4707ac69a"
+    $.ajax({
+    url: uv,
+    method: "GET"
 
+    }).then(function(uvIndex){
+    console.log(uvIndex.value)
+    getUv.unshift(uvIndex.value)
+        render()  
+        store()
+    })
+//////////
 })
 $.ajax({
     url: day5,
@@ -155,6 +202,12 @@ render()
 
 
 })
+
+
+
+
+
+ 
 
 
 
