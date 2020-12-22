@@ -39,7 +39,7 @@ $("button").on("click", function(event){
         store()
         
         //////////Api For UV Index Button Activation///////////////
-        var uv = "http://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=70cab7eef42f26169af049b4707ac69a"
+        var uv = "https://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=70cab7eef42f26169af049b4707ac69a"
         $.ajax({
         url: uv,
         method: "GET"
@@ -182,7 +182,7 @@ getLocal.unshift(response)
 store()
 render()
 //////////Ajax For Generating UV Data Via Search Bar//////////////////////////
-var uv = "http://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=70cab7eef42f26169af049b4707ac69a"
+var uv = "https://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=70cab7eef42f26169af049b4707ac69a"
     $.ajax({
     url: uv,
     method: "GET"
