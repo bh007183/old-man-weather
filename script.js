@@ -20,14 +20,15 @@ $(".clear").on("click", function(){
 ///////////////Function For Buttons//////////////////////
 function buttonClick(){
 $("button").on("click", function(event){
-   
+    
     ///////////Variable For Targeting Event Listener////////////
     var cityName = $(event.target).attr("data-name")
     console.log($(event.target).attr("data-name"))
     //////////API links and ajax///////////////
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
         var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
-    //////////Ajax for buttons on main content/////////////
+    //////////Ajax For Button Activation Main Content/////////////
+    
        $.ajax({
            url: queryURL,
            method: "GET"
@@ -37,12 +38,12 @@ $("button").on("click", function(event){
         render()
         store()
         
-        //////////Api For UV Index///////////////
+        //////////Api For UV Index Button Activation///////////////
         var uv = "http://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=70cab7eef42f26169af049b4707ac69a"
         $.ajax({
         url: uv,
         method: "GET"
-
+        
         }).then(function(uvIndex){
         console.log(uvIndex.value)
         getUv.unshift(uvIndex.value)
@@ -52,7 +53,7 @@ $("button").on("click", function(event){
        
         
        })
-       /////////Ajax for 5 day forcast button activation
+       /////////Ajax For 5 Day Forcast Button Activation
        $.ajax({
         url: day5,
         method: "GET"
@@ -68,11 +69,11 @@ $("button").on("click", function(event){
      
         })
     
-        
+    
     })
 
 }
-
+////////////////Function For Button Generation///////////////////////////
 function buttonCreation(){  
     $("nav").empty()
 for (var i = getLocal.length - 1; i >= 0;  i--){
@@ -83,7 +84,7 @@ for (var i = getLocal.length - 1; i >= 0;  i--){
 }    
 }
 
-
+//////////////Function For Displaying Data//////////////////////////
 function render(){
     try{
         buttonCreation()
@@ -146,20 +147,19 @@ function render(){
     
 }    
 
-
+/////////////Function For Storing Data/////////////////////////
 function store (){
 localStorage.setItem("city", JSON.stringify(getLocal));
 ///////////////////////////////////////////////////////
 localStorage.setItem("day5", JSON.stringify(getForcast))
 ////////////////////////////////////////////////////////
-
 localStorage.setItem("uvIn", JSON.stringify(getUv))
 
 }
 
 
 
-
+////////////Function For Generating Data via Search Bar////////////
 
 $(".button").on("click", function(event){
  event.preventDefault()
@@ -181,7 +181,7 @@ $.ajax({
 getLocal.unshift(response) 
 store()
 render()
-//////////
+//////////Ajax For Generating UV Data Via Search Bar//////////////////////////
 var uv = "http://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=70cab7eef42f26169af049b4707ac69a"
     $.ajax({
     url: uv,
@@ -193,7 +193,7 @@ var uv = "http://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat 
         render()  
         store()
     })
-//////////
+//////////Ajax For Generating Forcast Via Search Bar////////////////////////
 })
 $.ajax({
     url: day5,
