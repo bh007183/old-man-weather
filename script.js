@@ -1,33 +1,28 @@
-//API key1 e7a29c6f4a5754e864692a14224adc4e
-//API key2 70cab7eef42f26169af049b4707ac69a
-// UV http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid={API key}
 
-
+////////////////Retreave From Local Storage//////////////////
 var getLocal = JSON.parse(localStorage.getItem("city")) || []
 
-
-////////////////////////////////////////////////////////////////
-var getForcast = JSON.parse(localStorage.getItem("day5")) || []   //Empty array
+var getForcast = JSON.parse(localStorage.getItem("day5")) || []
 
 var getUv = JSON.parse(localStorage.getItem("uvIn")) || []
-console.log(getUv)
+
 
 
 render()
-buttonClick()
+// buttonClick()
 
 
-
+///////////////Function For Buttons//////////////////////
 function buttonClick(){
 $("button").on("click", function(event){
    
-    
+    ///////////Variable For Targeting Event Listener////////////
     var cityName = $(event.target).attr("data-name")
-    
     console.log($(event.target).attr("data-name"))
-    
+    //////////API links and ajax///////////////
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
         var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
+    //////////Ajax for buttons on main content/////////////
        $.ajax({
            url: queryURL,
            method: "GET"
@@ -36,7 +31,8 @@ $("button").on("click", function(event){
         getLocal.unshift(response) 
         render()
         store()
-        buttonClick()
+        
+        //////////Api For UV Index///////////////
         var uv = "http://api.openweathermap.org/data/2.5/uvi?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=70cab7eef42f26169af049b4707ac69a"
         $.ajax({
         url: uv,
@@ -48,9 +44,10 @@ $("button").on("click", function(event){
         render()  
         store()
     })
-    buttonClick()
+       
         
        })
+       /////////Ajax for 5 day forcast button activation
        $.ajax({
         url: day5,
         method: "GET"
@@ -60,7 +57,7 @@ $("button").on("click", function(event){
         render()  
         store()
         
-        buttonClick()
+        
         
         
      
@@ -73,6 +70,7 @@ $("button").on("click", function(event){
 
 function render(){
     try{
+        
         $("nav").empty()
     for (var i = getLocal.length - 1; i >= 0;  i--){
         var button = $("<button>").text(getLocal[i].name)
@@ -128,7 +126,7 @@ function render(){
         $(".five").text("T: " + getForcast[0].list[36].main.temp)
         $(".five1").text("H: " + getForcast[0].list[36].main.humidity)
         $(".five2").attr("src", "http://openweathermap.org/img/wn/" + getForcast[0].list[36].weather[0].icon + ".png")
-
+        buttonClick()
         
         }
         catch(err) {
@@ -160,8 +158,8 @@ $(".button").on("click", function(event){
  event.preventDefault()
 
 
- 
- var cityName = $(".search").val()
+ var cityName = $("input").val()
+ console.log(cityName)
  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=e7a29c6f4a5754e864692a14224adc4e&units=imperial"
  var day5 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=c9f240bfa0d5ddedac85ad59a6de240d&units=imperial"
  
