@@ -101,7 +101,7 @@ function render(){
           
     
         var date = moment().format('MMMM Do YYYY')
-        $(".image").attr("src", "http://openweathermap.org/img/wn/" + getLocal[0].weather[0].icon + ".png")
+        $(".image").attr("src", "https://openweathermap.org/img/wn/" + getLocal[0].weather[0].icon + ".png")
         $(".currentDat").text(getLocal[0].name + "  " + date)
         $(".curTemp").text("Temperature: " + getLocal[0].main.temp + "°F")
         $(".curHum").text("Humidity: " + getLocal[0].main.humidity + "%")
@@ -115,25 +115,25 @@ function render(){
         
         $(".one").text("T: " + getForcast[0].list[4].main.temp)
         $(".one1").text("H: " + getForcast[0].list[4].main.humidity)
-        $(".one2").attr("src", "http://openweathermap.org/img/wn/" + getForcast[0].list[4].weather[0].icon + ".png")
+        $(".one2").attr("src", "https://openweathermap.org/img/wn/" + getForcast[0].list[4].weather[0].icon + ".png")
         
         $(".two").text("T: " + getForcast[0].list[12].main.temp)
         $(".two1").text("H: " + getForcast[0].list[12].main.humidity)
-        $(".two2").attr("src", "http://openweathermap.org/img/wn/" + getForcast[0].list[12].weather[0].icon + ".png")
+        $(".two2").attr("src", "https://openweathermap.org/img/wn/" + getForcast[0].list[12].weather[0].icon + ".png")
        
         
         $(".three").text("T: " + getForcast[0].list[20].main.temp)
         $(".three1").text("H: " + getForcast[0].list[20].main.humidity)
-        $(".three2").attr("src", "http://openweathermap.org/img/wn/" + getForcast[0].list[20].weather[0].icon + ".png")
+        $(".three2").attr("src", "https://openweathermap.org/img/wn/" + getForcast[0].list[20].weather[0].icon + ".png")
         
         $(".four").text("T: " + getForcast[0].list[28].main.temp)
         $(".four1").text("H: " + getForcast[0].list[28].main.humidity)
-        $(".four2").attr("src", "http://openweathermap.org/img/wn/" + getForcast[0].list[28].weather[0].icon + ".png")
+        $(".four2").attr("src", "https://openweathermap.org/img/wn/" + getForcast[0].list[28].weather[0].icon + ".png")
         
     
         $(".five").text("T: " + getForcast[0].list[36].main.temp)
         $(".five1").text("H: " + getForcast[0].list[36].main.humidity)
-        $(".five2").attr("src", "http://openweathermap.org/img/wn/" + getForcast[0].list[36].weather[0].icon + ".png")
+        $(".five2").attr("src", "https://openweathermap.org/img/wn/" + getForcast[0].list[36].weather[0].icon + ".png")
         buttonClick()
         
         }
