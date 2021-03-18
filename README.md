@@ -1,6 +1,6 @@
 # old-man-weather
 
-I am a Full-Stack Developer and this application was an exercise in API usage from a third party.
+I am a Full-Stack Developer and this application was an exercise in API usage from a third party!
 
 
 <img src="image.png" alt="Screen shot of app">
